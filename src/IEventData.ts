@@ -6,3 +6,7 @@ export interface IEventData {
   date: string;
   device: string;
 }
+
+export interface IEventReceiver {
+  (event: IEventData): any;
+}
