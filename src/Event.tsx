@@ -5,6 +5,13 @@ interface Props {
   event: EventData;
 }
 
-const Event = ({ event }: Props) => <li key={event.date} >{event.name}</li>;
+const Event = ({ event }: Props) => (
+  <li key={event.date} className={'event'}>
+    <img src={event.logo} width="100%" height="100%" />
+    <span>{event.name}</span>
+    <span>{`${event.value} ${event.unit}`}</span>
+    <span>{event.date}</span>
+  </li>
+);
 
 export default Event;

@@ -23,6 +23,25 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.EventContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.event {
+  display: grid;
+  grid-template-columns: 2rem repeat(2, 1fr) auto;
+  width: 100%;
+}
+
+.event > span {
+  font-family: 'Courier New', Courier, monospace
 }
