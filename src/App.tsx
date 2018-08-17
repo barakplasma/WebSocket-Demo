@@ -44,7 +44,7 @@ class App extends React.Component<{}, AppState> {
       <div className="App">
         <ul className="EventContainer">
           {this.state.eventData.map(event => (
-            <Event event={event} />
+            <Event event={event} key={event.date} />
           ))}
         </ul>
       </div>
