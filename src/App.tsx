@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import { registerObserver } from 'react-perf-devtool';
 
 import { EventData } from './IEventData';
 import webSocketController from './websocket/websocketController';
@@ -17,7 +18,7 @@ class App extends React.Component<{}, AppState> {
     this.state = {
       eventData: []
     };
-
+    // registerObserver();
     this.handleNewEvent = this.handleNewEvent.bind(this);
 
     webSocketController(this.handleNewEvent);
@@ -27,23 +28,16 @@ class App extends React.Component<{}, AppState> {
     // console.log(newEvent); // uncomment to view stream of messages in console
     // console.log(this.state.eventData);
 
-    // to prevent memory issues, only saves the last 10 events
-    // to save memory, we can use a data structure here
     this.setState({
-      eventData: [...this.state.eventData.slice(-9), newEvent]
+      eventData: [...this.state.eventData, newEvent]
     });
-
-    // broken, only the first 10
-    // this.setState({
-    //   eventData: [...this.state.eventData.slice(0, 10), newEvent]
-    // });
   }
 
   render() {
     return (
       <div className="App">
         <ul className="EventContainer">
-          {this.state.eventData.map(event => (
+          {this.state.eventData.slice(-10).map(event => (
             <Event event={event} key={event.date} />
           ))}
         </ul>
