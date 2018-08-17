@@ -1,10 +1,10 @@
-import * as React from "react";
-import { IEventData } from "./IEventData";
+import * as React from 'react';
+import { EventData } from './IEventData';
 
 interface Props {
-  event: IEventData;
+  event: EventData;
 }
 
-const Event = ({ event }: Props) => <li>{event.name}</li>;
+const Event = ({ event }: Props) => <li key={event.date} >{event.name}</li>;
 
 export default Event;

@@ -1,9 +1,9 @@
-import ws from "./openConnection";
-import connectToWebSocketMessageStream from "./connectToWebSocketMessageStream";
+import ws from './openConnection';
+import connectToWebSocketMessageStream from './connectToWebSocketMessageStream';
 
-import { IEventReceiver } from "../IEventData";
+import { EventReceiver } from '../IEventData';
 
-const webSocketController = (connectToWebsocket: IEventReceiver): void => {
+const webSocketController = (connectToWebsocket: EventReceiver): void => {
   connectToWebSocketMessageStream(ws, connectToWebsocket);
 };
 

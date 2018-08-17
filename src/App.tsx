@@ -1,14 +1,14 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { IEventData } from "./IEventData";
-import webSocketController from "./websocket/websocketController";
+import { EventData } from './IEventData';
+import webSocketController from './websocket/websocketController';
 
-import "./App.css";
+import './App.css';
 
-import Event from "./Event";
+import Event from './Event';
 
 interface AppState {
-  eventData: IEventData[];
+  eventData: EventData[];
 }
 
 class App extends React.Component<{}, AppState> {
@@ -23,7 +23,7 @@ class App extends React.Component<{}, AppState> {
     webSocketController(this.handleNewEvent);
   }
 
-  handleNewEvent(newEvent: IEventData) {
+  handleNewEvent(newEvent: EventData) {
     // console.log(newEvent); // uncomment to view stream of messages in console
     // console.log(this.state.eventData);
 
@@ -39,7 +39,7 @@ class App extends React.Component<{}, AppState> {
       <div className="App">
         <ul>
           {this.state.eventData.map(event => (
-            <Event event={event} key={event.date} />
+            <Event event={event} />
           ))}
         </ul>
       </div>

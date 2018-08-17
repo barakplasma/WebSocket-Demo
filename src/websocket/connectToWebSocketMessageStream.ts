@@ -1,11 +1,11 @@
-import { IEventReceiver } from "../IEventData";
+import { EventReceiver } from '../IEventData';
 
 const connectToWebSocketMessageStream = (
   ws: WebSocket,
-  callback: IEventReceiver
+  callback: EventReceiver
 ) => {
   ws.onmessage = ev => {
-    callback(ev.data);
+    callback(JSON.parse(ev.data));
   };
 };
 

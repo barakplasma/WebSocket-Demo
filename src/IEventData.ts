@@ -1,4 +1,4 @@
-export interface IEventData {
+export interface EventData {
   name: string;
   unit: string;
   logo: string;
@@ -7,6 +7,6 @@ export interface IEventData {
   device: string;
 }
 
-export interface IEventReceiver {
-  (event: IEventData): any;
+export interface EventReceiver {
+  (event: EventData): void;
 }
