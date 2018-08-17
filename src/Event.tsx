@@ -10,7 +10,7 @@ const Event = ({ event }: Props) => (
     <img src={event.logo} width="100%" height="100%" />
     <span>{event.name}</span>
     <span>{`${event.value} ${event.unit}`}</span>
-    <span>{event.date}</span>
+    <span>{new Date(Date.parse(event.date)).toLocaleString('en-US')}</span>
   </li>
 );
 

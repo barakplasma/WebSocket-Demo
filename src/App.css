@@ -40,6 +40,11 @@
   display: grid;
   grid-template-columns: 2rem repeat(2, 1fr) auto;
   width: 100%;
+  border-top: 1px solid black
+}
+
+.event:last-of-type {
+  border-bottom: 1px solid black;
 }
 
 .event > span {
