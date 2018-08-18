@@ -32,7 +32,18 @@ const Event = ({ event, filter }: Props) => (
     </span>
     <span className="event_value">{`${event.value} ${event.unit}`}</span>
     <span className="event_date">
-      {new Date(event.date).toLocaleString('en-US')}
+      {/* I prefer using the native Date.toLocaleString('en-US'),
+       but manual formatting is 100x faster https://jsperf.com/date-formatting-library-performance */}
+      {`${event.date.substr(5, 2)}/${event.date.substr(
+        8,
+        2
+      )}/${event.date.substr(0, 4)}, ${
+        Number.parseInt(event.date.substr(11, 2), 10) < 11
+          ? event.date.substr(11, 2)
+          : Number.parseInt(event.date.substr(11, 2), 10) - 12
+      }${event.date.substr(13, 6)} ${
+        Number.parseInt(event.date.substr(11, 2), 10) < 11 ? 'AM' : 'PM'
+      }`}
     </span>
   </li>
 );
