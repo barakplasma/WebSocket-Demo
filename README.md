@@ -11,7 +11,7 @@ The search field allows you to filter events by substring in the name (case-inse
 1. The web socket data provider slows down after a few thousand events, and slows down to almost 0 after ~10k events
 1. I considered using a different data structure to improve the array manipulation, but keeping it simple seemed better.
 1. I really enjoyed using CSS Grid for this project, it is much more intuitive than flexbox
-1. I am also aware that the datetime locale formatter is CPU intensive, but it seems wrong to rewrite it to parse the string manually. To reduce dependencies, I used the native date formatter, but an easy performance improvement (I wrote a jsperf test to check) is to use moment.js in issue #1
+1. I am also aware that the datetime locale formatter is CPU intensive, but it seems wrong to rewrite it to parse the string manually. To reduce dependencies, I used the native date formatter, but an easy performance improvement (I wrote a jsperf test to check) is to use moment.js in [issue #1](https://github.com/barakplasma/WebSocket-Demo/issues/1)
 
 ### Future ideas
 It would be fun to add some reducers on the event arrays which would update the averages for each measurement. Some kind of dashboard like meter for instance.
