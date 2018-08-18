@@ -20,10 +20,11 @@ class App extends React.Component<{}, AppState> {
     this.state = {
       eventData: [],
       eventsToDisplay: [],
-      filterForEvents: 'te'
+      filterForEvents: false
     };
     // registerObserver();
     this.handleNewEvent = this.handleNewEvent.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
 
     webSocketController(this.handleNewEvent);
   }
@@ -38,17 +39,16 @@ class App extends React.Component<{}, AppState> {
 
   setEventsToDisplay = (eventsToDisplay: EventData[]) =>
     this.setState({
-      eventsToDisplay: this.displayManagableAmountOfEvents(eventsToDisplay)
+      eventsToDisplay: eventsToDisplay
     })
 
   filterEvents = (filter: string, eventsToFilter: EventData[]): EventData[] =>
-    eventsToFilter.filter(
-      event =>
-        event.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+    eventsToFilter.filter(event =>
+      event.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
     )
 
   displayManagableAmountOfEvents = (events: EventData[]): EventData[] =>
-    events.slice(0, 5)
+    events.slice(-10)
 
   sliceAndFilterEvents() {
     const shouldFilter = this.state.filterForEvents;
@@ -58,26 +58,42 @@ class App extends React.Component<{}, AppState> {
         this.filterEvents(shouldFilter, this.state.eventData)
       );
     } else {
-      this.setEventsToDisplay(
-        this.displayManagableAmountOfEvents(this.state.eventData)
-      );
+      this.setEventsToDisplay(this.state.eventData);
     }
+  }
+
+  handleFilterChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const inputValue = event.currentTarget.value;
+    this.setState({
+      filterForEvents: inputValue.length > 0 ? inputValue : false
+    });
   }
 
   render() {
     return (
       <div className="App">
         <ul className="EventContainer">
-          {this.state.eventsToDisplay.map(event => (
-            <Event
-              event={event}
-              key={event.date}
-              filter={this.state.filterForEvents}
+          <li>
+            🔎
+            <input
+              type="search"
+              name="filter"
+              id="filter"
+              onChange={this.handleFilterChange}
             />
-          ))}
+          </li>
+          {this.displayManagableAmountOfEvents(this.state.eventsToDisplay).map(
+            event => (
+              <Event
+                event={event}
+                key={event.date}
+                filter={this.state.filterForEvents}
+              />
+            )
+          )}
         </ul>
         <div className="counter">
-          Count of Events: {this.state.eventData.length}
+          Count of Events: {this.state.eventsToDisplay.length}
         </div>
       </div>
     );
