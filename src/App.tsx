@@ -10,13 +10,17 @@ import Event from './Event';
 
 interface AppState {
   eventData: EventData[];
+  eventsToDisplay: EventData[];
+  filterForEvents: string | false;
 }
 
 class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      eventData: []
+      eventData: [],
+      eventsToDisplay: [],
+      filterForEvents: 'te'
     };
     // registerObserver();
     this.handleNewEvent = this.handleNewEvent.bind(this);
@@ -25,23 +29,56 @@ class App extends React.Component<{}, AppState> {
   }
 
   handleNewEvent(newEvent: EventData) {
-    // console.log(newEvent); // uncomment to view stream of messages in console
-    // console.log(this.state.eventData);
-
     this.setState({
       eventData: [...this.state.eventData, newEvent]
     });
+
+    this.sliceAndFilterEvents();
+  }
+
+  setEventsToDisplay = (eventsToDisplay: EventData[]) =>
+    this.setState({
+      eventsToDisplay: this.displayManagableAmountOfEvents(eventsToDisplay)
+    })
+
+  filterEvents = (filter: string, eventsToFilter: EventData[]): EventData[] =>
+    eventsToFilter.filter(
+      event =>
+        event.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+    )
+
+  displayManagableAmountOfEvents = (events: EventData[]): EventData[] =>
+    events.slice(0, 5)
+
+  sliceAndFilterEvents() {
+    const shouldFilter = this.state.filterForEvents;
+
+    if (typeof shouldFilter === 'string') {
+      this.setEventsToDisplay(
+        this.filterEvents(shouldFilter, this.state.eventData)
+      );
+    } else {
+      this.setEventsToDisplay(
+        this.displayManagableAmountOfEvents(this.state.eventData)
+      );
+    }
   }
 
   render() {
     return (
       <div className="App">
         <ul className="EventContainer">
-          {this.state.eventData.slice(-10).map(event => (
-            <Event event={event} key={event.date} />
+          {this.state.eventsToDisplay.map(event => (
+            <Event
+              event={event}
+              key={event.date}
+              filter={this.state.filterForEvents}
+            />
           ))}
         </ul>
-        <div className="counter">Count of Events: {this.state.eventData.length}</div>
+        <div className="counter">
+          Count of Events: {this.state.eventData.length}
+        </div>
       </div>
     );
   }
