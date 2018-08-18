@@ -1,52 +1,50 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  display: grid;
+  grid-template: repeat(3, 1fr);
+  align-items: center;
+  align-content: center;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .EventContainer {
   display: grid;
   grid-template-columns: 1fr;
+  margin: 0;
+  padding: 0;
+  width: 50vw;
+  min-width: 40rem;
+  max-width: 100rem;
+  grid-column: 2;
 }
 
 .event {
   display: grid;
-  grid-template-columns: 2rem repeat(2, 1fr) auto;
+  grid-template-columns: 2rem repeat(2, 1fr) 2fr;
+  justify-content: space-around;
+  align-content: center;
   width: 100%;
-  border-top: 1px solid black
+  height: 3rem;
+  border-top: 1px solid black;
+  text-align: right;
 }
 
 .event:last-of-type {
   border-bottom: 1px solid black;
 }
 
+.event > img {
+  height: 3rem;
+}
+
 .event > span {
-  font-family: 'Courier New', Courier, monospace
+  height: 1rem;
+  align-self: center;
+}
+
+.event_date {
+  align-self: stretch;
+}
+
+.counter {
+  grid-column: 2;
 }

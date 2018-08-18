@@ -41,6 +41,7 @@ class App extends React.Component<{}, AppState> {
             <Event event={event} key={event.date} />
           ))}
         </ul>
+        <div className="counter">Count of Events: {this.state.eventData.length}</div>
       </div>
     );
   }
