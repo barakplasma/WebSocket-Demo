@@ -12,6 +12,7 @@ interface AppState {
   eventData: EventData[];
   eventsToDisplay: EventData[];
   filterForEvents: string | false;
+  limitResultsInMemory: boolean;
 }
 
 class App extends React.Component<{}, AppState> {
@@ -20,18 +21,24 @@ class App extends React.Component<{}, AppState> {
     this.state = {
       eventData: [],
       eventsToDisplay: [],
-      filterForEvents: false
+      filterForEvents: false,
+      limitResultsInMemory: true
     };
     // registerObserver();
     this.handleNewEvent = this.handleNewEvent.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.toggleOnLimit = this.toggleOnLimit.bind(this);
 
     webSocketController(this.handleNewEvent);
   }
 
   handleNewEvent(newEvent: EventData) {
+    const previousEventsToSaveInMemory = this.state.limitResultsInMemory
+      ? this.state.eventData.slice(-999)
+      : this.state.eventData;
+
     this.setState({
-      eventData: [...this.state.eventData, newEvent]
+      eventData: [...previousEventsToSaveInMemory, newEvent]
     });
 
     this.sliceAndFilterEvents();
@@ -69,6 +76,11 @@ class App extends React.Component<{}, AppState> {
     });
   }
 
+  toggleOnLimit(event: React.ChangeEvent<HTMLInputElement>) {
+    const inputValue = event.currentTarget.checked;
+    this.setState({ limitResultsInMemory: inputValue });
+  }
+
   render() {
     return (
       <div className="App">
@@ -94,6 +106,16 @@ class App extends React.Component<{}, AppState> {
         </ul>
         <div className="counter">
           Count of Events: {this.state.eventsToDisplay.length}
+          <div>
+            Limit Events In Memory to Improve Performance
+            <input
+              type="checkbox"
+              name="limitOn"
+              id="limitOn"
+              onChange={this.toggleOnLimit}
+              checked={this.state.limitResultsInMemory}
+            />
+          </div>
         </div>
       </div>
     );
