@@ -15,4 +15,4 @@ The search field allows you to filter events by substring in the name (case-inse
 
 ### Future ideas
 1. It would be fun to add some reducers on the event arrays which would update the averages for each measurement. Some kind of dashboard like meter for instance.
-1. A React Native Version is in progress: https://snack.expo.io/ryNxEvoUQ
+1. A React Native Version is in progress: https://snack.expo.io/rJm4vDjUQ
