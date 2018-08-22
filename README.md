@@ -14,4 +14,5 @@ The search field allows you to filter events by substring in the name (case-inse
 1. I am also aware that the datetime locale formatter is CPU intensive, but it seems short sighted to rewrite it to parse the string manually. To reduce dependencies, I used the native date formatter, but easy performance improvements (I wrote a jsperf test to check) are listed in [issue #1](https://github.com/barakplasma/WebSocket-Demo/issues/1)
 
 ### Future ideas
-It would be fun to add some reducers on the event arrays which would update the averages for each measurement. Some kind of dashboard like meter for instance.
+1. It would be fun to add some reducers on the event arrays which would update the averages for each measurement. Some kind of dashboard like meter for instance.
+1. A React Native Version is in progress: https://snack.expo.io/ryNxEvoUQ
