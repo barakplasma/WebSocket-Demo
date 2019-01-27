@@ -1,6 +1,8 @@
 # Web Socket Demo in React
 by Michael Salaverry
 
+UPDATE: The websocket event server I was using is currently down, and I haven't had a chance to rewrite one for myself. So you won't see events at the moment.
+
 ## Features
 This project uses a publicy available web socket provider to get fake sensor readings.
 It displays the events in real time.
